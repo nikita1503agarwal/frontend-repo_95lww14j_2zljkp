@@ -1,71 +1,62 @@
+import { useEffect } from 'react'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import About from './components/About'
+import Schemes from './components/Schemes'
+import Notices from './components/Notices'
+import Gallery from './components/Gallery'
+import Contact from './components/Contact'
+
 function App() {
+  useEffect(() => {
+    // Load Bootstrap CSS & JS and Icons dynamically for this modern look
+    const css = document.createElement('link')
+    css.rel = 'stylesheet'
+    css.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'
+    css.integrity = 'sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH'
+    css.crossOrigin = 'anonymous'
+    document.head.appendChild(css)
+
+    const icons = document.createElement('link')
+    icons.rel = 'stylesheet'
+    icons.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css'
+    document.head.appendChild(icons)
+
+    const script = document.createElement('script')
+    script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
+    script.integrity = 'sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz'
+    script.crossOrigin = 'anonymous'
+    document.body.appendChild(script)
+
+    return () => {
+      document.head.removeChild(css)
+      document.head.removeChild(icons)
+      document.body.removeChild(script)
+    }
+  }, [])
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]"></div>
+    <div className="bg-body-tertiary" style={{scrollBehavior:'smooth'}}>
+      <Navbar />
+      <Hero />
+      <About />
+      <Schemes />
+      <Notices />
+      <Gallery />
+      <Contact />
 
-      <div className="relative min-h-screen flex items-center justify-center p-8">
-        <div className="max-w-2xl w-full">
-          {/* Header with Flames icon */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center mb-6">
-              <img
-                src="/flame-icon.svg"
-                alt="Flames"
-                className="w-24 h-24 drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]"
-              />
-            </div>
-
-            <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
-              Flames Blue
-            </h1>
-
-            <p className="text-xl text-blue-200 mb-6">
-              Build applications through conversation
-            </p>
+      <footer className="py-4 bg-dark text-white-50">
+        <div className="container d-flex flex-column flex-lg-row align-items-center justify-content-between gap-3">
+          <div>
+            © {new Date().getFullYear()} Gram Panchayat • All Rights Reserved
           </div>
-
-          {/* Instructions */}
-          <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-8 shadow-xl mb-6">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                1
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Describe your idea</h3>
-                <p className="text-blue-200/80 text-sm">Use the chat panel on the left to tell the AI what you want to build</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                2
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Watch it build</h3>
-                <p className="text-blue-200/80 text-sm">Your app will appear in this preview as the AI generates the code</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                3
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Refine and iterate</h3>
-                <p className="text-blue-200/80 text-sm">Continue the conversation to add features and make changes</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="text-center">
-            <p className="text-sm text-blue-300/60">
-              No coding required • Just describe what you want
-            </p>
+          <div className="d-flex gap-3">
+            <a href="#home" className="link-light text-decoration-none small">Home</a>
+            <a href="#services" className="link-light text-decoration-none small">Schemes</a>
+            <a href="#contact" className="link-light text-decoration-none small">Contact</a>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   )
 }
